@@ -5,14 +5,12 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
-@Getter
-public class CourseRequestDto {
-    private String title;
-    private String tutor;
 
-    public CourseRequestDto(String title, String tutor) {
-        this.title = title;
-        this.tutor = tutor;
-    }
+@Setter
+@Getter
+@RequiredArgsConstructor
+public class CourseRequestDto {
+    private final String title;
+    private final String tutor;
+
 }
