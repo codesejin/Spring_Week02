@@ -2,6 +2,7 @@ package com.sprata.week02;
 
 import com.sprata.week02.domain.Course;
 import com.sprata.week02.domain.CourseRepository;
+import com.sprata.week02.service.CourseService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,20 +19,33 @@ public class Week02Application {
         SpringApplication.run(Week02Application.class, args);
     }
 
-    // Week02Application.java 의 main 함수 아래에 붙여주세요.
-    @Bean
-    public CommandLineRunner demo(CourseRepository repository) {
-        return (args) -> {
 
-            Course course1 = new Course("웹개발의봄 Spring", "박세진");
-            repository.save(course1); // 이 한줄이면 create부터 insert까지 한방
-            //코스 여러개가 순서대로 담겨져 온다 => 레포지토리가 select해서 전부다 courseList안에 있는걸 다 가져옴
-            List<Course> courseList = repository.findAll(); // 조회하기
-            for(int i = 0; i < courseList.size(); i++){
-                Course c = courseList.get(i);
-                System.out.println(c.getTitle());
-                System.out.println(c.getTutor());
+    @Bean
+    public CommandLineRunner demo(CourseRepository courseRepository, CourseService courseService) {
+        return (args) -> {
+            //생성하고 insert하기
+            courseRepository.save(new Course("프론트엔드의 꽃, 리액트", "임민영"));
+            //조회하기
+            System.out.println("데이터 인쇄");
+            List<Course> courseList = courseRepository.findAll();
+            for (int i=0; i<courseList.size(); i++) {
+                Course course = courseList.get(i);
+                System.out.println(course.getId());
+                System.out.println(course.getTitle());
+                System.out.println(course.getTutor());
             }
+            //업데이트하기
+            Course new_course = new Course("웹개발의 봄, Spring", "임민영");
+            courseService.update(1L, new_course);
+            courseList = courseRepository.findAll();
+            for (int i=0; i<courseList.size(); i++) {
+                Course course = courseList.get(i);
+                System.out.println(course.getId());
+                System.out.println(course.getTitle());
+                System.out.println(course.getTutor());
+            }
+            // 삭제하기
+            courseRepository.deleteAll();
         };
     }
 }
