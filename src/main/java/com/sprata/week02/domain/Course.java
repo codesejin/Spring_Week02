@@ -6,7 +6,7 @@ import javax.persistence.*;
 //arguenmts는 파라미터 재료
 @NoArgsConstructor // 기본생성자를 대신 생성해줍니다.
 @Entity // 그냥 클래스아니고, 데이터베이스 기준으로 테이블 역할 해주는 클래스
-public class Course {
+public class Course extends Timestamped {
 
     @Id // ID 값, Primary Key로 사용하겠다는 뜻입니다.
     @GeneratedValue(strategy = GenerationType.AUTO) // 자동 증가 명령입니다.
