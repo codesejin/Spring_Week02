@@ -26,6 +26,11 @@ public class Course extends Timestamped {
     // 2-7에서 id 게터 만들거임, 안만들었던 이유는 id와 나머지 차이를 보여주기 위해
     // 원래 사실 id도 게터만 만들어주곤 한다
 
+    public Course(CourseRequestDto requestDto){
+        this.title = requestDto.getTitle();
+        this.tutor = requestDto.getTutor();
+    }
+
     public Course(String title, String tutor) {
         this.title = title;
         this.tutor = tutor;

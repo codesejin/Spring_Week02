@@ -45,8 +45,8 @@ public class Week02Application {
                 System.out.println(course.getTitle());
                 System.out.println(course.getTutor());
             }
-            // 삭제하기
-            courseRepository.deleteAll();
+//            // 삭제하기
+//            courseRepository.deleteAll();
         };
     }
 }
